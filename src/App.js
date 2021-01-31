@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const auth = useSelector((state) => state.auth);
+
+	const dispatch = useDispatch();
+
+	const login = () => {
+		dispatch({ type: 'LOGIN' });
+	};
+
+	const logout = () => {
+		dispatch({ type: 'LOGOUT' });
+	};
+
+	return (
+		<div>
+			El usuario esta conectado - {auth ? 'Verdadero' : 'Falso'}
+			<br />
+			{auth ? <button onClick={logout}>Desconectarse</button> : <button onClick={login}>Conectarse</button>}
+		</div>
+	);
 }
 
 export default App;
